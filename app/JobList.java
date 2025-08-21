@@ -15,24 +15,24 @@ public class JobList {
 
     public void ReDescribe(int number, String description) {
         if (number < jobs.size()) {
-            jobs.get(number).description = description;
+            jobs.get(number).setDescription(description);
         }
     }
 
     public void ListJobs() {
         for (int i = 0; i < jobs.size(); i++) {
-            System.out.println(String.format("%d %s %s %s", i, jobs.get(i).title, jobs.get(i).description, jobs.get(i).isCompleted ? "Completed" : "Not completed"));
+            System.out.printf("%d: %s\n", i, jobs.get(i).ToString());
         }
     }
 
     public void JobDone(int number) {
         if (number < jobs.size()) {
-           jobs.get(number).isCompleted = true;
+           jobs.get(number).Done();
         }
     }
 
     public void DeleteJob(int number) {
-        if (number < jobs.size() && jobs.get(number).isCompleted) {
+        if (number < jobs.size() && jobs.get(number).getCompleted()) {
             jobs.remove(number);
         }
     }
