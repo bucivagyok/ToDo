@@ -34,4 +34,8 @@ public class Job {
     public String ToString() {
         return title + " " + description + (isCompleted ? " Done" : " Not done");
     }
+
+    public String ToSave() {
+        return title + ";" + description + (isCompleted ? ";Done" : ";Not done");
+    }
 }
