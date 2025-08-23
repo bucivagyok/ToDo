@@ -27,6 +27,12 @@ public class Job {
         this.isCompleted = false;
     }
 
+    public Job(String title, String description, boolean isCompleted) {
+        this.title = title;
+        this.description = description;
+        this.isCompleted = isCompleted;
+    }
+
     public void Done() {
         this.isCompleted = true;
     }

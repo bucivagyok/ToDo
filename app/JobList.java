@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class JobList {
     private ArrayList<Job> jobs;
 
     public JobList() {
         jobs = new ArrayList<Job>();
+        Load();
     }
 
     public void AddJob(Job job) {
@@ -49,18 +52,33 @@ public class JobList {
         }
     }
 
+    static String fileName = "tasks.txt";
+
     public void Save() {
-    try {
-        String fileName = "tasks.txt";
-        File file = new File(fileName);
-        file.createNewFile();
-        FileWriter writer = new FileWriter(fileName);
-        for (Job job : jobs) {
-            writer.write(job.ToSave());
+        try {
+            File file = new File(fileName);
+            file.createNewFile();
+            FileWriter writer = new FileWriter(fileName);
+            for (Job job : jobs) {
+                writer.write(job.ToSave() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error");
         }
-        writer.close();
-    } catch (IOException e) {
-        System.out.println("Error");
     }
+
+    public void Load() {
+        try {
+            File file = new File(fileName);
+            Scanner reader = new Scanner(file);
+            while (reader.hasNextLine()) {
+                String[] data = reader.nextLine().split(";");
+                AddJob(new Job(data[0], data[1], data[2] == "Done"));
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            //File doesn't exist, starting with an empty list.
+        }
     }
 }
