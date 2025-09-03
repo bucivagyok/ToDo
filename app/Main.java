@@ -15,10 +15,10 @@ public class Main {
         String command = "";
         Scanner scanner = new Scanner(System.in);
         while (!command.equals("exit")) {
-            System.out.println("---\nWhat to do (add, redescribe, list, complete, delete)?");
+            System.out.println("---\nWhat to do (add, redescribe, list, complete, delete, exit)?");
             command = scanner.nextLine();
             switch (command.toLowerCase()) {
-                case "add": System.out.println("Add");
+                case "add":
                     Add(scanner);
                     break;
                 case "redescribe":
